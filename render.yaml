@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: expression-coach
+    env: node
+    plan: starter
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    autoDeploy: true
+    disk:
+      name: expression-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: EXPRESSION_DB_PATH
+        value: /data/expression.sqlite
+      - key: DEEPSEEK_API_KEY
+        sync: false
+      - key: DEEPSEEK_BASE_URL
+        value: https://www.right.codes/deepseek/v1
+      - key: DEEPSEEK_MODEL
+        value: deepseek-v4-flash
+      - key: DOUBAO_ASR_APP_ID
+        sync: false
+      - key: DOUBAO_ASR_ACCESS_KEY
+        sync: false
+      - key: DOUBAO_ASR_SECRET_KEY
+        sync: false
+      - key: DOUBAO_ASR_STREAM_RESOURCE_ID
+        value: volc.bigasr.sauc.duration
+      - key: DOUBAO_ASR_STREAM_ENDPOINT
+        value: wss://openspeech.bytedance.com/api/v3/sauc/bigmodel_async
