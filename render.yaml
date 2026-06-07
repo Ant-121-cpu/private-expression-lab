@@ -2,19 +2,15 @@ services:
   - type: web
     name: expression-coach
     env: node
-    plan: starter
+    plan: free
     buildCommand: npm ci && npm run build
     startCommand: npm start
     autoDeploy: true
-    disk:
-      name: expression-data
-      mountPath: /data
-      sizeGB: 1
     envVars:
       - key: NODE_ENV
         value: production
       - key: EXPRESSION_DB_PATH
-        value: /data/expression.sqlite
+        value: ./data/expression.sqlite
       - key: DEEPSEEK_API_KEY
         sync: false
       - key: DEEPSEEK_BASE_URL
